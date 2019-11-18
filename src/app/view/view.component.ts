@@ -11,7 +11,7 @@ export class ViewComponent implements OnInit {
   constructor(private albumService: AlbumServiceService) { }
 
   ngOnInit() {
-    this.albumService.PostAlbumInformation().subscribe((data) => {
+    this.albumService.GetAlbumInformation().subscribe((data) => {
       this.MyAlbums = data.Search;
       console.log(this.MyAlbums);
     })

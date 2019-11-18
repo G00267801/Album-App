@@ -1,61 +1,75 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const path = require('path');
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
+const PORT = 4000;
+const cors = require('cors');
+const mongoose = require('mongoose');
 
+const mongoDB = 'mongodb://admin:admin123#@ds241408.mlab.com:41408/dm_lab7'
+mongoose.connect(mongoDB, {useNewUrlParser:true});
 
-app.post('/', (req, res) => res.send('Hello World!'))
+const Schema = mongoose.Schema;
 
-app.post('/whatever', (req, res) => {res.send('Good Bye')})
+const albumSchema = new Schema({
+  title:String,
+  year:String,
+  poster:String
+});
 
-app.post('/hello/:name', (req, res) => {
-    console.log(req.params.name);
-    res.send('Hello ' + req.params.name)})
+const albumModel = mongoose.model('album', albumSchema);
 
-app.post('/test', (req, res) =>{
-    //res.send('i will send a file');
-    res.sendFile(path.join(__dirname + '/index.html'))
-})
-
-app.post('/api/movies', (req, res)=>{
-const movies = [
-    {
-    "Title":"Avengers: Infinity War",
-    "Year":"2018",
-    "Poster":"https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
-    },
-    {
-    "Title":"Captain America: Civil War",
-    "Year":"2016",
-    "Poster":"https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
-    }
-    ];
-res.status(200).json({
-    message: "Everthing is good",
-    myMovies:movies
-})
-    //res.send('my api')
-})
-
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post('/name', (req,res)=>{
-    console.log('post called');
-    console.log(req.body.fname);
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers",
+  "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+  });
 
-    res.send("Hello from post " +
-    req.body.fname + ' ' +
-    req.body.lname);
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
 })
 
-app.post('/name', (req,res)=>{
-    console.log('route calling');
-
-    console.log(req.query.lname);
-
-    res.send('Hello '+ req.query.fname + ' '+ req.query.lname);
+app.get('/api/albums', (req,res,next) => {
+  
+  console.log("get request")
+  albumModel.find((err,data)=>{
+    res.json({albums:data});
+  })
+  
+  
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.post('/api/albums', (req,res) =>{
+console.log('post Sucessfull');
+console.log(req.body)
+console.log(req.body.title);
+console.log(req.body.year);
+console.log(req.body.poster);
+
+albumModel.create({
+  title: req.body.title,
+  year: req.body.year,
+  poster: req.body.poster
+});
+res.json('data uploaded')
+
+
+})
+
+app.get('/api/albums/:id',(req,res)=>{
+  console.log(req.params.id);
+
+  albumModel.findById(req.params.id, (err, data)=>{
+    res.json(data);
+  })
+})
+
+app.listen(PORT, function () {
+  console.log('Server is running on Port: ', PORT);
+});
