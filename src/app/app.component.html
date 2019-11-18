@@ -1,0 +1,13 @@
+<mat-toolbar color="primary"> 
+  <mat-toolbar-row>
+          <span class="title-center">
+      Album Application
+  </span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+<button mat-button [routerLink]="['/new']" color="Warn">New</button>
+<button mat-button [routerLink]="['/view']">View</button>
+</mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

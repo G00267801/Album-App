@@ -1,0 +1,37 @@
+<mat-card>
+    <form (submit)="onAddAlbum(albumForm)" #albumForm="ngForm">
+      <mat-form-field>
+          <label> Album Title</label>
+        <input
+          matInput
+          type="text"
+          name="title"
+          ngModel
+          required
+          #title="ngModel">
+      </mat-form-field>
+      <mat-form-field>
+          <label>Album Year</label>
+        <textarea
+          matInput
+          name="year"
+          ngModel
+          required
+          #content="ngModel"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <label>Album Poster</label>
+        <textarea
+          matInput
+         rows="4"
+          name="poster"
+          ngModel
+          required
+          #content="ngModel"></textarea>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit">Save Album</button>
+    </form>
+  </mat-card>
