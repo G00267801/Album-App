@@ -5,7 +5,7 @@ const PORT = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://admin:admin123#@ds241408.mlab.com:41408/dm_lab7'
+const mongoDB = 'mongodb+srv://Admin:Admin123@cluster0-ovnca.mongodb.net/test?retryWrites=true&w=majoritynode'
 mongoose.connect(mongoDB, {useNewUrlParser:true});
 
 const Schema = mongoose.Schema;
@@ -30,9 +30,9 @@ app.use(function(req, res, next) {
   next();
   });
 
-// respond with "hello world" when a GET request is made to the homepage
+// respond with "view albums" when a GET request is made to the homepage
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.send('View Albums');
 })
 
 app.get('/api/albums', (req,res,next) => {
