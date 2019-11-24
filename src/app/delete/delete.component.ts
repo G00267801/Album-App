@@ -3,11 +3,11 @@ import { AlbumServiceService } from '../Services/album-service.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  selector: 'app-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.css']
 })
-export class ViewComponent implements OnInit {
+export class DeleteComponent implements OnInit {
   MyAlbums: any = [];
   constructor(private albumService: AlbumServiceService) { }
 
@@ -20,11 +20,7 @@ export class ViewComponent implements OnInit {
 
   onDelete(id:String){
     console.log("Deleting album with id: "+id);
-    this.albumService.DeleteAlbum(id).subscribe(
-      ()=>{
-        this.ngOnInit();
-      }
-    );
+    this.albumService.DeleteAlbum(id).subscribe();
   }
 
 }

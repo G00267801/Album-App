@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {NewComponent} from './new/new.component'
 import {ViewComponent} from './view/view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
   {
     path: 'new',
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: 'view',
     component: ViewComponent
+  },
+  {
+    path: '',
+    component: HomePageComponent
   },
   
 ];

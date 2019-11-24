@@ -17,11 +17,17 @@ MatExpansionModule,
 import { NewComponent } from './new/new.component';
 import { ViewComponent } from './view/view.component';
 import {FormsModule} from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
+import { EditComponent } from './edit/edit.component';
+import { DeleteComponent } from './delete/delete.component';
 @NgModule({
   declarations: [
     AppComponent,
     NewComponent,
-    ViewComponent
+    ViewComponent,
+    HomePageComponent,
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
