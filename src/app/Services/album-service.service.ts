@@ -16,7 +16,7 @@ export class AlbumServiceService {
 
   AddAlbumInformation(title:string,year:string,poster:string):Observable<any>{
     const album:Album = {title:title, year:year, poster:poster};
-    return this.http.post('http://localhost:4000/api/album', album)
+    return this.http.post('http://localhost:4000/api/albums', album)
   }
 
   DeleteAlbum(id:String):Observable<any>{

@@ -13,10 +13,12 @@ const routes: Routes = [
     component: ViewComponent
   },
   {
-    path: '',
+    path: 'home',
     component: HomePageComponent
   },
+
   
+
 ];
 
 @NgModule({

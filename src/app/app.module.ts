@@ -27,7 +27,7 @@ import { DeleteComponent } from './delete/delete.component';
     ViewComponent,
     HomePageComponent,
     EditComponent,
-    DeleteComponent
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
