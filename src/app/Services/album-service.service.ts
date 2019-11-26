@@ -30,7 +30,7 @@ export class AlbumServiceService {
   UpdateAlbums(id:String,title:string, year:string, poster:string):Observable<any>{
     const album:Album = {title:title, year:year, poster:poster};
     console.log("Edit"+id);
-    return this.http.put('http://localhost:4000/api/album/'+id, album);
+    return this.http.put('http://localhost:4000/api/albums/'+id, album);
   }
 
 

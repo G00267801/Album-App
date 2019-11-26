@@ -19,7 +19,9 @@ import { ViewComponent } from './view/view.component';
 import {FormsModule} from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { EditComponent } from './edit/edit.component';
-import { DeleteComponent } from './delete/delete.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,6 @@ import { DeleteComponent } from './delete/delete.component';
     ViewComponent,
     HomePageComponent,
     EditComponent,
-    DeleteComponent,
   ],
   imports: [
     BrowserModule,

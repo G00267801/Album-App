@@ -22,10 +22,9 @@ album:any=[];
     );
 
   }
-  onEditAlbum(form:NgForm){
+  onEditMovie(form:NgForm){
     console.log(form.value.title);
     this.albumService.UpdateAlbums(this.album._id, form.value.title,
       form.value.year, form.value.poster).subscribe();
   }
 }
-
