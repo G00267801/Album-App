@@ -1,6 +1,4 @@
-/* mat-expansion-panel-header.mat-expanded {
-    background: rgb(0, 204, 255);
-    }
-    .mat-expansion-panel-header {
-    background: rgb(142, 147, 151);
-    } */
+mat-form-field,
+textarea {
+  width: 100%;
+}

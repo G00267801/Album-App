@@ -16,7 +16,7 @@ const albumSchema = new Schema({
   poster:String
 });
 
-const albumModel = mongoose.model('album', albumSchema);
+const AlbumModel = mongoose.model('album',albumSchema);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,20 +30,42 @@ app.use(function(req, res, next) {
   next();
   });
 
-// respond with "view albums" when a GET request is made to the homepage
+// respond with "hello customer" when a GET request is made to the homepage
 app.get('/', (req, res) => {
-  res.send('View Albums');
+  res.send('hello customer');
 })
 
 app.get('/api/albums', (req,res,next) => {
-  
+
   console.log("get request")
-  albumModel.find((err,data)=>{
+  AlbumModel.find((err,data)=>{
     res.json({albums:data});
   })
-  
-  
 })
+
+app.delete('/api/albums/:id', (req,res) =>{
+  console.log(req.params.id);
+
+  AlbumsModel.deleteOne({_id:req.params.id},(error,data)=>{
+    if(error)
+      res.json(error);
+      
+    res.json(data);
+  })
+})
+
+app.get('/api/albums/search/:title/:criteria', (req,res)=>{
+  console.log(req.params.title);
+  console.log(req.params.criteria);
+if(req.params.criteria == 'title')
+  {
+  AlbumModel.find({ 'title': req.params.title},
+(error,data) =>{
+  res.json(data);
+})
+  }
+})
+
 
 app.post('/api/albums', (req,res) =>{
 console.log('post Sucessfull');
@@ -52,7 +74,7 @@ console.log(req.body.title);
 console.log(req.body.year);
 console.log(req.body.poster);
 
-albumModel.create({
+AlbumModel.create({
   title: req.body.title,
   year: req.body.year,
   poster: req.body.poster
@@ -62,12 +84,23 @@ res.json('data uploaded')
 
 })
 
-app.get('/api/albums/:id',(req,res)=>{
+app.get('/api/album/:id',(req,res)=>{
   console.log(req.params.id);
 
-  albumModel.findById(req.params.id, (err, data)=>{
+  AlbumModel.findById(req.params.id, (err, data)=>{
     res.json(data);
   })
+})
+
+
+app.put('/api/albums/:id', (req, res)=>{
+  console.log(req.body);
+  console.log("Edit "+req.params.id);
+
+  AlbumModel.findByIdAndUpdate(req.params.id,
+    req.body, {new:true}, (error, data)=>{
+      res.send(data);
+    })
 })
 
 app.listen(PORT, function () {
