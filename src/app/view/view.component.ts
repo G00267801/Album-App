@@ -19,12 +19,8 @@ export class ViewComponent implements OnInit {
   }
 
   onDelete(id:String){
-    console.log("Deleting album with id: "+id);
-    this.albumService.DeleteAlbum(id).subscribe(
-      ()=>{
-        this.ngOnInit();
-      }
-    );
+    console.log("Deleting album with id:" +id);
+    this.albumService.DeleteAlbum(id).subscribe();
   }
 
 }

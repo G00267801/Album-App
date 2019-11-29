@@ -14,17 +14,15 @@ album:any=[];
     private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.albumService.GetAlbum(this.route.snapshot.params['id']).subscribe(
-      (data) =>{
+    this.albumService.GetAlbum(this.route.snapshot.params['id']).subscribe((data) =>{
           this.album = data;
           console.log(this.album);
       }
-    );
+    )}
 
-  }
-  onEditMovie(form:NgForm){
+  onEditAlbum(form: NgForm) {
     console.log(form.value.title);
-    this.albumService.UpdateAlbums(this.album._id, form.value.title,
-      form.value.year, form.value.poster).subscribe();
-  }
+    this.albumService.UpdateAlbum(this.album._id,form.value.title,
+      form.value.year,form.value.poster).subscribe();
+    }
 }

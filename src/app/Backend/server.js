@@ -19,9 +19,6 @@ const albumSchema = new Schema({
 const AlbumModel = mongoose.model('album',albumSchema);
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -29,6 +26,10 @@ app.use(function(req, res, next) {
   "Origin, X-Requested-With, Content-Type, Accept");
   next();
   });
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // respond with "hello customer" when a GET request is made to the homepage
 app.get('/', (req, res) => {
@@ -43,10 +44,20 @@ app.get('/api/albums', (req,res,next) => {
   })
 })
 
+app.put('/api/albums/:id', (req, res)=>{
+  console.log(req.body);
+  console.log("Edit "+req.params.id);
+
+  AlbumModel.findByIdAndUpdate(req.params.id,
+    req.body, {new:true}, (error, data)=>{
+      res.send(data);
+    })
+})
+
 app.delete('/api/albums/:id', (req,res) =>{
   console.log(req.params.id);
 
-  AlbumsModel.deleteOne({_id:req.params.id},(error,data)=>{
+  AlbumModel.deleteOne({_id:req.params.id},(error,data)=>{
     if(error)
       res.json(error);
       
@@ -93,16 +104,5 @@ app.get('/api/album/:id',(req,res)=>{
 })
 
 
-app.put('/api/albums/:id', (req, res)=>{
-  console.log(req.body);
-  console.log("Edit "+req.params.id);
-
-  AlbumModel.findByIdAndUpdate(req.params.id,
-    req.body, {new:true}, (error, data)=>{
-      res.send(data);
-    })
-})
-
-app.listen(PORT, function () {
-  console.log('Server is running on Port: ', PORT);
-});
+app.listen(PORT, () => 
+console.log(`Example app listening on port ${PORT}!`))

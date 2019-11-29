@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Album} from '../album.model';
+import {Album} from '../Album.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AlbumServiceService {
     return this.http.get('http://localhost:4000/api/albums');
   }
 
-  AddAlbumInformation(title:string,year:string,poster:string):Observable<any>{
+  SendAlbumInformation(title:string,year:string,poster:string):Observable<any>{
     const album:Album = {title:title, year:year, poster:poster};
     return this.http.post('http://localhost:4000/api/albums', album)
   }
@@ -25,14 +25,26 @@ export class AlbumServiceService {
 
   GetAlbum(id:String):Observable<any>{
     return this.http.get('http://localhost:4000/api/albums/'+id);
-  }
-
-  UpdateAlbums(id:String,title:string, year:string, poster:string):Observable<any>{
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       UpdateAlbums(id:String,title:string, year:string, poster:string):Observable<any>{
     const album:Album = {title:title, year:year, poster:poster};
     console.log("Edit"+id);
     return this.http.put('http://localhost:4000/api/albums/'+id, album);
   }
 
+  /*UpdateAlbum(id:String,title:String,year:String,poster:String):Observable<any> {
 
+    console.log(title + "="+ year);
+    const album:Album = {title:title, year:year, poster:poster};
 
+    return this.http.put('http://localhost:4000/api/albums/'+id,album);
+  }
+*/
+
+    UpdateAlbum(id:String,title:String,year:String,poster:String):Observable<any> {
+  
+    console.log(title + "="+ year);
+    const album:Album = {title:title, year:year, poster:poster};
+
+    return this.http.put('http://localhost:4000/api/drivers/'+id,album);
+  }
 }
