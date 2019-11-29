@@ -1,12 +1,12 @@
 <mat-card>
     <form (submit)="onEditAlbum(albumForm)" #albumForm="ngForm">
       <mat-form-field>
-          <label> Album Title</label>
+          <label> Album Name</label>
         <input
           matInput
           type="text"
           name="title"
-          ngModel={{album.title}}
+          ngModel={{album.name}}
           required
           #title="ngModel">
       </mat-form-field>

@@ -18,8 +18,8 @@ export class NewComponent implements OnInit {
   onAddAlbum(form: NgForm) {
     console.log(form.value);
 
-    this.albumService.SendAlbumInformation(form.value.title,
-      form.value.year, form.value.poster).subscribe();
+    this.albumService.SendAlbumInformation(form.value.name,
+      form.value.year).subscribe();
     console.log(form.value);
     form.resetForm();
   }

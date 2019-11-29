@@ -22,7 +22,7 @@ album:any=[];
 
   onEditAlbum(form: NgForm) {
     console.log(form.value.title);
-    this.albumService.UpdateAlbum(this.album._id,form.value.title,
-      form.value.year,form.value.poster).subscribe();
+    this.albumService.UpdateAlbum(this.album._id,form.value.name,
+      form.value.year).subscribe();
     }
 }

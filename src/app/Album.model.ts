@@ -1,5 +1,4 @@
 export interface Album {
-    title: String;
+    name: String;
     year: String;
-    poster: String;
   }
